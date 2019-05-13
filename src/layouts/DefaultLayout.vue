@@ -31,19 +31,63 @@
       <slot></slot>
     </main>
     <footer-partial></footer-partial>
+
+    <!-- Modal Login -->
+    <Modal :showModal="modals.login" @dispatchCloseModal="closeModal('login')">
+      <LoginForm
+        slot="modal-content"
+        @dispatchLoginData="dispatchLoginData($event)"
+      />
+    </Modal>
+
+    <!-- Modal Register -->
+
+    <Modal :showModal="modals.register" @dispatchCloseModal="closeModal('register')">
+      <RegisterForm
+        slot="modal-content"
+        @dispatchRegisterData="dispatchRegisterData($event)"
+      />
+    </Modal>
+
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import HeaderPartial from '@/partials/HeaderPartial.vue';
 import FooterPartial from '@/partials/FooterPartial.vue';
+import Modal from '@/components/Modal.vue';
+import LoginForm from '@/components/forms/Login.vue';
+import RegisterForm from '@/components/forms/Register.vue';
 
 export default {
   name: 'DefaultLayout',
+  computed: {
+    ...mapGetters(['modals'])
+  },
   components: {
     HeaderPartial,
     FooterPartial,
+    Modal,
+    LoginForm,
+    RegisterForm
   },
+  methods: {
+    closeModal(type) {
+      this.$store.dispatch('TOGGLE_MODAL_STATE', {
+        name: type,
+        value: false
+      })
+    },
+
+    dispatchLoginData(data) {
+      console.log('login', data)
+    },
+
+    dispatchRegisterData(data) {
+      console.log('register', data)
+    }
+  }
 };
 </script>
 

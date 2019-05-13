@@ -19,14 +19,15 @@
               <div class="flex items-center">
                 <img class="w-8 h-8 rounded-full mr-2" src="https://avatars2.githubusercontent.com/u/1901273?s=460&v=4" alt="Avatar of Javier Diaz">
                 <div class="text-sm">
-                  <p class="text-black leading-none">Javier Diaz</p>
+                  <p class="text-black leading-none">Luis Castillo</p>
                   <p class="text-grey-dark">Online</p>
                 </div>
               </div>
             </div>
             <div v-else>
-              <button class="btn__outline btn__outline--teal rounded mr-2">Login</button>
+              <button @click.prevent="getLogin" class="btn__outline btn__outline--teal rounded mr-2">Login</button>
               <button
+                @click.prevent="signUp"
                 class="bg-yellow-dark text-yellow-darker font-semibold py-2 px-4 rounded">
                 Register</button>
             </div>
@@ -48,9 +49,17 @@ export default {
   methods: {
     getLogin() {
       console.log('Login Click');
+      this.$store.dispatch('TOGGLE_MODAL_STATE', {
+        name: 'login',
+        value: true
+      })
     },
     signUp() {
       console.log('Sign Up Click');
+      this.$store.dispatch('TOGGLE_MODAL_STATE', {
+        name: 'register',
+        value: true
+      })
     },
   },
 };
