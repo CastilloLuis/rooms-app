@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
 import firebase from 'firebase';
@@ -35,6 +37,10 @@ export default new Vuex.Store({
       const newItem = item;
       newItem['.key'] = id;
       Vue.set(state[resource], id, newItem);
+    },
+
+    SET_AUTHID(state, id) {
+      state.authId = id;
     },
 
   },
@@ -90,25 +96,40 @@ export default new Vuex.Store({
       });
     },
 
-    REGISTER_USER: ({ state, commit }, { email, name, password}) => new Promise((resolve) => {
-      firebase.auth().createUserWithEmailAndPassword(email, password).then((account) => {
-        const id = account.user.uid;
-        const registeredAt = Math.floor(Date.now() / 1000);
-        const newUser = { email, name, registeredAt };
-        firebase.database().ref('users').child(id).set(newUser) // we generate a child by the id, and to that new accout we set the new user
-          .then(() => {
-            commit('SET_ITEM', { resource: 'users', id, item: newUser });
-            resolve(state.users[id]);
-          });
-      });
+    REGISTER_USER: ({ state, commit }, { email, name, password }) => new Promise(async (resolve) => {
+      const account = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const id = account.user.uid;
+      const registeredAt = Math.floor(Date.now() / 1000);
+      const newUser = { email, name, registeredAt };
+      await firebase.database().ref('users').child(id).set(newUser); // we generate a child by the id, and to that new accout we set the new user
+      commit('SET_ITEM', { resource: 'users', id, item: newUser });
+      resolve(state.users[id]);
     }),
+
+    FETCH_AUTH_USER: async ({ dispatch, commit }) => {
+      const userId = firebase.auth().currentUser.uid;
+      console.log(userId)
+      await dispatch('FETCH_USER', { id: userId }); // verify if the user is auth correctly, we set then if its true the authIddddd
+      commit('SET_AUTHID', userId);
+    },
+
+    SIGN_IN(context, { email, password }) {
+      firebase.auth().signInWithEmailAndPassword(email, password);
+    },
+
+    async LOG_OUT({ commit }) {
+      await firebase.auth.signOut();
+      commit('SET_AUTHID', null);
+    },
 
   },
 
   getters: {
     modals: state => state.modals,
 
-    authUser: state => state.users[state.authId],
+    authUser(state) { 
+      return state.authId ? state.users[state.authId] : null;
+    },
 
     rooms: state => state.rooms,
 

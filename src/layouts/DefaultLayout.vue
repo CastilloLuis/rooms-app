@@ -80,8 +80,9 @@ export default {
       })
     },
 
-    dispatchLoginData(data) {
-      console.log('login', data)
+    async dispatchLoginData({ email, password }) {
+      await this.$store.dispatch('SIGN_IN', {email, password})
+      this.closeModal('login');
     },
 
     async dispatchRegisterData(data) {
