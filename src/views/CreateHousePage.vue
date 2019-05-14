@@ -20,18 +20,18 @@
                 <form>
                     <div class="mb-4">
                         <label class="input__label">Title</label>
-                        <input type="text" class="input__field" placeholder="Bruce Wayne">
+                        <input type="text" v-model="publication.title" class="input__field" placeholder="Bruce Wayne">
                     </div>
                     <div class="mb-4">
                         <label class="input__label">Description</label>
-                        <textarea type="text" rows="10" class="input__field" placeholder="Bruce Wayne"></textarea>
+                        <textarea type="text" v-model="publication.description" rows="10" class="input__field" placeholder="Bruce Wayne"></textarea>
                     </div>      
                     <div class="mb-4">
                         <label class="input__label">Feautured Image</label>
-                        <input type="text" class="input__field" placeholder="PASTE URL HERE">
+                        <input type="text" v-model="publication.featuredImage" class="input__field" placeholder="PASTE URL HERE">
                     </div>
                     <div class="mb-4 text-right">
-                        <button class="w-full bg-yellow-dark text-yellow-darker font-semibold py-3 px-6 rounded">Publish</button>
+                        <button @click.prevent="saveRoom" class="w-full bg-yellow-dark text-yellow-darker font-semibold py-3 px-6 rounded">Publish</button>
                     </div>
                 </form>
             </div>
@@ -48,6 +48,23 @@ export default {
     components: {
         PageLayout
     },
+
+    data() {
+        return {
+            publication: {
+                title: '',
+                description: '',
+                featuredImage: ''
+            }
+        }
+    },
+
+    methods: {
+        saveRoom() {
+            const room = {...this.publication, publishedAt: Date.now()};
+            this.$store.dispatch('CREATE_ROOM', room);
+        }
+    }
 
 }
 </script>
