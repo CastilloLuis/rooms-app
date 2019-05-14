@@ -28,7 +28,7 @@
                     </div>      
                     <div class="mb-4">
                         <label class="input__label">Feautured Image</label>
-                        <input type="text" v-model="publication.featuredImage" class="input__field" placeholder="PASTE URL HERE">
+                        <input type="text" v-model="publication.featured_image" class="input__field" placeholder="PASTE URL HERE">
                     </div>
                     <div class="mb-4 text-right">
                         <button @click.prevent="saveRoom" class="w-full bg-yellow-dark text-yellow-darker font-semibold py-3 px-6 rounded">Publish</button>
@@ -54,7 +54,7 @@ export default {
             publication: {
                 title: '',
                 description: '',
-                featuredImage: ''
+                featured_image: ''
             }
         }
     },
@@ -62,7 +62,7 @@ export default {
     methods: {
         saveRoom() {
             const room = {...this.publication, publishedAt: Date.now()};
-            this.$store.dispatch('CREATE_ROOM', room);
+            this.$store.dispatch('CREATE_ROOM', room).then(() => this.$router.push({name: 'SearchPage'}));
         }
     }
 
