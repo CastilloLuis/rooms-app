@@ -60,9 +60,10 @@ export default {
     },
 
     methods: {
-        saveRoom() {
+        async saveRoom() {
             const room = {...this.publication, publishedAt: Date.now()};
-            this.$store.dispatch('CREATE_ROOM', room).then(() => this.$router.push({name: 'SearchPage'}));
+            await this.$store.dispatch('CREATE_ROOM', room);
+            this.$router.push({name: 'SearchPage'})
         }
     }
 

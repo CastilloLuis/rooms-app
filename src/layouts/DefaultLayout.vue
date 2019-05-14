@@ -84,8 +84,10 @@ export default {
       console.log('login', data)
     },
 
-    dispatchRegisterData(data) {
-      console.log('register', data)
+    async dispatchRegisterData(data) {
+      console.log('register', data);
+      await this.$store.dispatch('REGISTER_USER', data);
+      this.closeModal('register');
     }
   }
 };

@@ -7,13 +7,19 @@
             <div class="mb-4">
                 <label class="input__label">E-mail</label>
                 <div class="form__field relative">
-                    <input type="text" v-model="email" class="input__field" placeholder="example@example.com"/>
+                    <input type="text" v-model="registerForm.email" class="input__field" placeholder="example@example.com"/>
                 </div>
             </div>
             <div class="mb-4">
+                <label class="input__label">Name</label>
+                <div class="form__field relative">
+                    <input type="text" v-model="registerForm.name" class="input__field" placeholder="John Doe"/>
+                </div>
+            </div>            
+            <div class="mb-4">
                 <label class="input__label">Password</label>
                 <div class="form__field relative">
-                    <input type="password" v-model="password" class="input__field" placeholder="**********"/>
+                    <input type="password" v-model="registerForm.password" class="input__field" placeholder="**********"/>
                 </div>
             </div>     
             <div class="mb-4">
@@ -27,14 +33,17 @@
 export default {
     data() {
         return {
-            email: '',
-            password: ''
+            registerForm: {
+                email: '',
+                name: '',
+                password: '',
+            }
         }
     },
 
     methods: {
         dispatchRegisterData() {
-            this.$emit('dispatchRegisterData', {email: this.email, password: this.password})
+            this.$emit('dispatchRegisterData', this.registerForm)
         }
     }
 }
