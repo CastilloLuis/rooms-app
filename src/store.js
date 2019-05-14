@@ -118,7 +118,7 @@ export default new Vuex.Store({
     },
 
     async LOG_OUT({ commit }) {
-      await firebase.auth.signOut();
+      await firebase.auth().signOut();
       commit('SET_AUTHID', null);
     },
 

@@ -21,6 +21,9 @@
                   <p class="text-grey-dark">Online</p>
                 </div>
               </div>
+              <button @click.prevent="logOut" class="flex items-center" style="padding-left: 15px">
+                <i class="material-icons">exit_to_app</i>
+              </button>
             </div>
             <div v-else>
               <button @click.prevent="getLogin" class="btn__outline btn__outline--teal rounded mr-2">Login</button>
@@ -53,19 +56,22 @@ export default {
   },
   methods: {
     getLogin() {
-      console.log('Login Click');
       this.$store.dispatch('TOGGLE_MODAL_STATE', {
         name: 'login',
         value: true
       })
     },
+
     signUp() {
-      console.log('Sign Up Click');
       this.$store.dispatch('TOGGLE_MODAL_STATE', {
         name: 'register',
         value: true
       })
     },
+
+    logOut() {
+      this.$store.dispatch('LOG_OUT');
+    }
   },
 };
 </script>
