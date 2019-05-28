@@ -1,4 +1,4 @@
-# platzi-rooms
+# rooms app
 
 ## Project setup
 ```

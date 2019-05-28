@@ -103,7 +103,7 @@ export default {
       user: 'authUser' // we access to user element by authUser
     }),
     userRoomsCount() {
-      return this.$store.getters.userRoomsCount(this.user['.key']);
+      // return this.$store.getters.userRoomsCount(this.user['.key']);
     }
   },
 

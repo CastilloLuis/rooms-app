@@ -14,7 +14,7 @@
               <button class="mr-4 flex items-center">
                 <i class="material-icons">notifications</i>
               </button>
-              <div class="flex items-center">
+              <div @click="goToProfile()" class="flex items-center" style="cursor: pointer">
                 <img class="w-8 h-8 rounded-full mr-2" src="https://avatars2.githubusercontent.com/u/1901273?s=460&v=4" alt="Avatar of Javier Diaz">
                 <div class="text-sm">
                   <p class="text-black leading-none">{{user.name}}</p>
@@ -67,6 +67,10 @@ export default {
         name: 'register',
         value: true
       })
+    },
+
+    goToProfile() {
+      this.$router.push('/user/profile')
     },
 
     logOut() {
