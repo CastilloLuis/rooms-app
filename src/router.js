@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-expressions */
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from './store';
 import HomePage from './views/HomePage.vue';
 import SearchPage from './views/SearchPage.vue';
 import NotFoundPage from './views/NotFoundPage.vue';
@@ -11,7 +13,7 @@ import HousesPages from './views/user/HousesPage.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -33,6 +35,9 @@ export default new Router({
       path: '/user/profile',
       name: 'ProfilePage',
       component: ProfilePage,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/house',
@@ -42,11 +47,17 @@ export default new Router({
       path: '/user/houses',
       name: 'HousesPages',
       component: HousesPages,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/house/new',
       name: 'CreateHousePage',
       component: CreateHousePage,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '*',
@@ -55,3 +66,13 @@ export default new Router({
     },
   ],
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(route => route.meta.requiresAuth)) {
+//     store.state.authId ? next() : next({ name: 'HomePage' });
+//   } else {
+//     next();
+//   }
+// });
+
+export default router;

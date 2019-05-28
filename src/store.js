@@ -50,6 +50,14 @@ export default new Vuex.Store({
       commit('SET_MODAL_STATE', { name, value });
     },
 
+    TOGGLE_SNACKBAR: ({ commit }, { text, title }) => {
+      Vue.notify({
+        group: 'foo',
+        title,
+        text,
+      });
+    },
+
     CREATE_ROOM: ({ state, commit }, room) => {
       const newRoom = room;
       const roomId = firebase.database().ref('rooms').push().key;
@@ -108,7 +116,6 @@ export default new Vuex.Store({
 
     FETCH_AUTH_USER: async ({ dispatch, commit }) => {
       const userId = firebase.auth().currentUser.uid;
-      console.log(userId)
       await dispatch('FETCH_USER', { id: userId }); // verify if the user is auth correctly, we set then if its true the authIddddd
       commit('SET_AUTHID', userId);
     },

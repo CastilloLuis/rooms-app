@@ -1,10 +1,15 @@
 import Vue from 'vue';
 import firebase from 'firebase';
+import Notifications from 'vue-notification';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
+Vue.use(Notifications);
+
 Vue.config.productionTip = false;
+
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyBmso8tDteOWAe4I5-l7WCYejfvC5ofDdc',
