@@ -1,29 +1,21 @@
-# rooms app
+# Rooms App
 
-## Project setup
-```
-yarn install
-```
+This project was built mainly to implement best practices for building declarative and dynamic and scalable UI in VueJS.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Getting Started
+After cloning the project, you have to run the next commands:
 
-### Compiles and minifies for production
 ```
-yarn run build
+npm install && npm run serve
 ```
 
-### Run your tests
-```
-yarn run test
-```
+## Built With
 
-### Lints and fixes files
-```
-yarn run lint
-```
+* [JavaScript]() - FrontEnd Programming Language.
+* [VueJS]() - JavaScript Library for building UI.
+* [Vuex]() - VueJS native state manager.
+* [Axios]() - Promise based HTTP client for the browser and node.js.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Authors
+
+* **Luis Castillo** - *Initial work* - [CastleDev](https://github.com/CastilloLuis)
