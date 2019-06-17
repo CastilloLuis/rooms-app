@@ -1,6 +1,6 @@
 # Rooms App
 
-This project was built mainly to implement best practices for building declarative and dynamic and scalable UI in VueJS.
+This project was built mainly to implement best practices for building declarative, dynamic and scalable UI in VueJS.
 
 ## Getting Started
 After cloning the project, you have to run the next commands:
